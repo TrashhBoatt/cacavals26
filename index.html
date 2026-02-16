@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine 💗</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffd6e7, #ffc2d1);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Container umum */
+.container {
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Amplop */
+.envelope-container {
+    cursor: pointer;
+}
+
+.envelope {
+    font-size: 22vw;
+    transition: transform 0.4s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.1);
+}
+
+.open-text {
+    font-size: 5vw;
+    color: #b03060;
+    margin-top: 10px;
+}
+
+/* Ucapan */
+.message {
+    display: none;
+    color: #b03060;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+.message h1 {
+    font-size: 8vw;
+    margin-bottom: 20px;
+}
+
+.message p {
+    font-size: 4.5vw;
+    line-height: 1.6;
+}
+
+/* Floating Hearts */
+.heart {
+    position: absolute;
+    bottom: -20px;
+    color: #ff4d88;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Desktop adjustment */
+@media (min-width: 768px) {
+    .envelope { font-size: 120px; }
+    .open-text { font-size: 20px; }
+    .message h1 { font-size: 40px; }
+    .message p { font-size: 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="envelope-container" onclick="openLetter()">
+        <div class="envelope">💌</div>
+        <div class="open-text">Klik untuk membuka</div>
+    </div>
+
+    <div class="message" id="message">
+        <h1>Happy Valentine 💗</h1>
+        <p>
+            Untuk kamu yang selalu membuat hariku lebih hangat.<br><br>
+            Terima kasih sudah hadir dan menjadi alasan senyumku setiap hari.<br><br>
+            Semoga kita terus berjalan bersama, dengan cerita yang semakin indah.
+        </p>
+    </div>
+
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="musik.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function openLetter() {
+    document.querySelector('.envelope-container').style.display = 'none';
+    document.getElementById('message').style.display = 'block';
+    document.getElementById('bgMusic').play();
+    createHearts();
+}
+
+function createHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 10 + 15) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 500);
+}
+</script>
+
+</body>
+</html>

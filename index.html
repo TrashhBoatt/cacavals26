@@ -1,234 +1,374 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Valentine 💗</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine — untuk kamu 💗</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(145deg, #ffe5f0 0%, #ffd9e8 100%);
+            overflow-x: hidden;
+            text-align: center;
+            line-height: 1.5;
+            color: #a03c5e;
+        }
 
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #ffd6e7, #ffc2d1);
-    overflow: hidden;
-    text-align: center;
-}
+        /* smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
 
-/* ===== Amplop Awal ===== */
-.envelope-section {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+        /* ===== AMPOP (ENVELOPE) ===== */
+        .envelope-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: radial-gradient(circle at 30% 50%, #ffe2ef, #ffc1d4);
+            transition: opacity 0.6s ease;
+        }
 
-.envelope {
-    font-size: 22vw;
-    cursor: pointer;
-    transition: transform 0.4s ease;
-}
+        .envelope {
+            font-size: 22vw;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 20px 20px rgba(210, 80, 120, 0.3));
+            animation: gentleWave 3s infinite alternate;
+        }
 
-.envelope:hover {
-    transform: scale(1.1);
-}
+        @keyframes gentleWave {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-12px) scale(1.02); }
+        }
 
-.open-text {
-    font-size: 5vw;
-    color: #b03060;
-    margin-top: 10px;
-}
+        .envelope:hover {
+            transform: scale(1.15) rotate(2deg);
+            filter: drop-shadow(0 25px 25px rgba(200, 60, 100, 0.5));
+        }
 
-/* ===== Konten ===== */
-.content {
-    display: none;
-    padding: 40px 20px;
-    color: #b03060;
-}
+        .open-text {
+            font-size: 5vw;
+            font-weight: 400;
+            color: #b13e62;
+            margin-top: 12px;
+            letter-spacing: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
+            padding: 8px 24px;
+            border-radius: 60px;
+            box-shadow: 0 4px 12px rgba(255, 200, 220, 0.6);
+        }
 
-.content h1 {
-    font-size: 8vw;
-    margin-bottom: 20px;
-}
+        /* ===== KONTEN UTAMA ===== */
+        .content {
+            display: none;
+            padding: 60px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: transparent;
+        }
 
-.content p {
-    font-size: 4.5vw;
-    margin-bottom: 60px;
-    line-height: 1.7;
-}
+        .content h1 {
+            font-size: 13vw;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d44e7a, #b43b66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+            filter: drop-shadow(0 8px 12px #ffb6c7);
+        }
 
-/* ===== Scroll Reveal ===== */
-.reveal {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 1.2s ease;
-}
+        .content p {
+            font-size: 6vw;
+            font-weight: 300;
+            color: #692c44;
+            margin: 30px 0 70px;
+            line-height: 1.7;
+            background: rgba(255, 245, 250, 0.5);
+            backdrop-filter: blur(2px);
+            padding: 30px 20px;
+            border-radius: 48px;
+            box-shadow: 0 15px 25px rgba(170, 80, 110, 0.15);
+            border: 1px solid rgba(255, 220, 235, 0.7);
+        }
 
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
+        /* ===== REVEAL (SCROLL) ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(70px) scale(0.98);
+            transition: all 1s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
 
-/* ===== Parallax Section ===== */
-.parallax {
-    position: relative;
-    overflow: hidden;
-}
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
 
-.parallax img {
-    width: 100%;
-    max-width: 350px;
-    border-radius: 20px;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    transition: transform 0.2s ease-out;
-}
+        /* ===== PARALLAX CARD ===== */
+        .parallax {
+            margin: 70px 0;
+            border-radius: 40px;
+            background: rgba(255, 240, 245, 0.5);
+            backdrop-filter: blur(8px);
+            padding: 25px 20px 30px;
+            box-shadow: 0 30px 40px -20px rgba(150, 50, 80, 0.4);
+            border: 1px solid #ffe2ed;
+            transition: box-shadow 0.4s;
+        }
 
-.caption {
-    margin-top: 15px;
-    font-size: 4vw;
-}
+        .parallax:hover {
+            box-shadow: 0 40px 50px -18px #c54f7a;
+        }
 
-/* ===== Last Section Fullscreen ===== */
-.love-section {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #ff9ebc, #ff6f91);
-    color: white;
-    font-size: 12vw;
-    font-weight: bold;
-    letter-spacing: 4px;
-}
+        .parallax img {
+            width: 100%;
+            max-width: 340px;
+            border-radius: 40px;
+            box-shadow: 0 20px 30px rgba(150, 40, 70, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            display: block;
+            margin: 0 auto;
+            border: 4px solid #ffdbea;
+        }
 
-/* Floating Hearts */
-.heart {
-    position: fixed;
-    bottom: -20px;
-    color: #ff4d88;
-    animation: float 6s linear infinite;
-    pointer-events: none;
-}
+        .parallax img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 40px rgba(180, 60, 90, 0.4);
+        }
 
-@keyframes float {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-110vh); opacity: 0; }
-}
+        .caption {
+            margin-top: 20px;
+            font-size: 5vw;
+            font-weight: 350;
+            color: #982d57;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 10px 20px;
+            border-radius: 100px;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+        }
 
-/* Desktop */
-@media (min-width: 768px) {
-    .content h1 { font-size: 40px; }
-    .content p { font-size: 18px; }
-    .caption { font-size: 16px; }
-    .open-text { font-size: 20px; }
-    .envelope { font-size: 120px; }
-    .love-section { font-size: 70px; }
-}
-</style>
+        /* ===== LAST SECTION FULLSCREEN (LOVE) ===== */
+        .love-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(125deg, #f98eb0, #fa6b95, #fc4d7c);
+            color: #fff9fb;
+            font-size: 16vw;
+            font-weight: 800;
+            letter-spacing: 6px;
+            text-shadow: 0 10px 25px #a02b55, 2px 2px 0 #ffe2f0;
+            border-radius: 60px 60px 0 0;
+            margin-top: 80px;
+            box-shadow: 0 -15px 40px #ffacc6;
+            font-style: italic;
+        }
+
+        /* Floating hearts yang lebih manis */
+        .heart {
+            position: fixed;
+            bottom: -30px;
+            color: #ff3b6f;
+            animation: floatHearts 7s cubic-bezier(0.45, 0.05, 0.2, 0.99) infinite;
+            pointer-events: none;
+            z-index: 999;
+            filter: drop-shadow(0 0 8px #ff99bb);
+            opacity: 0.8;
+        }
+
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.9;
+            }
+            70% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-115vh) rotate(25deg) scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        /* audio disembunyikan */
+        audio {
+            display: none;
+        }
+
+        /* Desktop refined */
+        @media (min-width: 640px) {
+            .content h1 { font-size: 60px; }
+            .content p { font-size: 20px; padding: 40px 40px; }
+            .caption { font-size: 18px; }
+            .open-text { font-size: 22px; padding: 12px 40px; }
+            .envelope { font-size: 200px; }
+            .love-section { font-size: 110px; }
+        }
+
+        /* Extra smooth untuk ukuran besar */
+        @media (min-width: 1024px) {
+            .content p { max-width: 650px; margin-left: auto; margin-right: auto; }
+            .parallax img { max-width: 400px; }
+        }
+
+        /* menambah aksen garis vintage */
+        .content h1::after {
+            content: "✨";
+            font-size: 40px;
+            display: block;
+            opacity: 0.5;
+            margin-top: -15px;
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- Amplop -->
+<!-- Amplop pembuka -->
 <div class="envelope-section" id="envelopeSection">
     <div class="envelope" onclick="openLetter()">💌</div>
-    <div class="open-text">Klik untuk membuka</div>
+    <div class="open-text">klik untuk membuka</div>
 </div>
 
-<!-- Konten -->
+<!-- Konten Valentine (sama persis, hanya style dirapikan) -->
 <div class="content" id="content">
 
     <h1 class="reveal">Happy Valentine 💗</h1>
 
     <p class="reveal">
-        Buat kamu yang selalu nemenin aku.
-        Maaf ya aku gabisa selalu nemenin kamu, belum jadi apa yang kamu mau,
-        belum bener bener jadi yang terbaik. tapi, itu semua pasti waktu yang perbaikin.
+        Buat kamu yang selalu nemenin aku.<br>
+        Maaf ya aku gabisa selalu nemenin kamu, belum jadi apa yang kamu mau, 
+        belum bener bener jadi yang terbaik. tapi, itu semua pasti waktu yang perbaikin. 
         Terima kasih udah mau sama aku terus...
     </p>
 
     <!-- FOTO 1 -->
     <div class="parallax reveal">
-        <img src="foto1.jpg">
+        <img src="foto1.jpg" alt="foto pertama">
         <div class="caption">foto bareng pertama kita... 💗</div>
     </div>
 
     <!-- FOTO 2 -->
     <div class="parallax reveal">
-        <img src="foto2.jpg">
+        <img src="foto2.jpg" alt="foto kedua">
         <div class="caption">setiap kamu kirim foto pasti aku simpen kok ✨</div>
     </div>
 
     <!-- FOTO 3 -->
     <div class="parallax reveal">
-        <img src="foto3.jpg">
+        <img src="foto3.jpg" alt="foto ketiga">
         <div class="caption">semoga kita bisa bareng bareng terus yaa 🤍</div>
     </div>
 
-    <!-- LAST FULLSCREEN -->
+    <!-- LAST FULLSCREEN (I LOVE YOU) -->
     <div class="love-section reveal">
         I LOVE YOU 🤍
     </div>
 
 </div>
 
+<!-- Musik latar (sama seperti asli) -->
 <audio id="bgMusic" loop>
     <source src="musik.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function openLetter() {
-    document.getElementById("envelopeSection").style.display = "none";
-    document.getElementById("content").style.display = "block";
-    document.body.style.overflow = "auto";
-    document.getElementById("bgMusic").play();
-    createHearts();
-    activateReveal();
-}
+    function openLetter() {
+        const envelope = document.getElementById("envelopeSection");
+        const content = document.getElementById("content");
+        const music = document.getElementById("bgMusic");
 
-/* Floating Hearts */
-function createHearts() {
-    setInterval(() => {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML = "💗";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (Math.random() * 10 + 15) + "px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-    }, 600);
-}
+        // sembunyikan amplop, tampilkan konten
+        envelope.style.display = "none";
+        content.style.display = "block";
+        document.body.style.overflow = "auto";
 
-/* Scroll Reveal */
-function activateReveal() {
-    const reveals = document.querySelectorAll('.reveal');
+        // mainkan musik (jika diizinkan browser)
+        music.play().catch(() => {
+            // kadang autoplay diblok, tapi setidaknya coba
+            console.log("autoplay mungkin diblokir, user harus interaksi lagi");
+        });
 
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
+        // mulai efek hati
+        createHearts();
+
+        // aktifkan reveal observer
+        activateReveal();
+    }
+
+    /* Floating hearts — lebih lembut & bervariasi */
+    function createHearts() {
+        setInterval(() => {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            // pilih random simbol hati
+            const hearts = ["💗", "💖", "💘", "💝", "💕", "💞"];
+            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (Math.random() * 14 + 16) + "px"; // 16-30px
+            heart.style.animationDuration = (Math.random() * 4 + 5) + "s"; // 5-9 detik
+            heart.style.color = `hsl(${340 + Math.random()*20}, 85%, 70%)`; // variasi pink
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 8000);
+        }, 500);
+    }
+
+    /* Scroll reveal dengan intersection observer */
+    function activateReveal() {
+        const reveals = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { 
+            threshold: 0.2,
+            rootMargin: "0px 0px -30px 0px" 
+        });
+
+        reveals.forEach(reveal => observer.observe(reveal));
+    }
+
+    /* Parallax efek halus pada gambar */
+    window.addEventListener('scroll', () => {
+        const images = document.querySelectorAll('.parallax img');
+        const scrollY = window.pageYOffset;
+        images.forEach(img => {
+            const speed = 0.1; // lebih subtle
+            const parent = img.closest('.parallax');
+            if (parent) {
+                const offset = parent.offsetTop - scrollY;
+                // gerakan sangat halus agar tidak mengganggu
+                img.style.transform = `translateY(${offset * 0.02}px)`;
             }
         });
-    }, { threshold: 0.2 });
-
-    reveals.forEach(reveal => observer.observe(reveal));
-}
-
-/* Parallax Effect */
-window.addEventListener('scroll', function() {
-    const images = document.querySelectorAll('.parallax img');
-    images.forEach(img => {
-        const speed = 0.2;
-        const offset = window.pageYOffset;
-        img.style.transform = "translateY(" + offset * speed * 0.05 + "px)";
     });
-});
+
+    // untuk jaga-jaga jika user langsung scroll tanpa trigger open?
+    // tapi openLetter sudah menjalankan observer.
+    // Namun jika konten langsung aktif (misal debugging), observer tetap jalan.
+    window.onload = () => {
+        // jika konten kebuka secara langsung (misal display:block dari awal) tetap aktifin observer.
+        if (document.getElementById("content").style.display === "block") {
+            activateReveal();
+            createHearts();
+        }
+    };
 </script>
 
+<!-- tambahan: sedikit space di bawah love-section (opsional) -->
 </body>
 </html>

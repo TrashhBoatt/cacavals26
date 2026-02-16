@@ -16,27 +16,21 @@ body {
     font-family: 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #ffd6e7, #ffc2d1);
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     text-align: center;
 }
 
-/* Container umum */
-.container {
-    padding: 20px;
-    width: 100%;
-    max-width: 500px;
-}
-
-/* Amplop */
-.envelope-container {
-    cursor: pointer;
+/* ===== Amplop Awal ===== */
+.envelope-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .envelope {
     font-size: 22vw;
+    cursor: pointer;
     transition: transform 0.4s ease;
 }
 
@@ -50,73 +44,104 @@ body {
     margin-top: 10px;
 }
 
-/* Ucapan */
-.message {
+/* ===== Konten Setelah Klik ===== */
+.content {
     display: none;
+    padding: 30px 20px 60px 20px;
     color: #b03060;
-    animation: fadeIn 1.5s ease forwards;
 }
 
-.message h1 {
+.content h1 {
     font-size: 8vw;
     margin-bottom: 20px;
 }
 
-.message p {
+.content p {
     font-size: 4.5vw;
+    margin-bottom: 40px;
     line-height: 1.6;
+}
+
+/* Foto Section */
+.photo-card {
+    margin-bottom: 40px;
+    animation: fadeInUp 1s ease;
+}
+
+.photo-card img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.caption {
+    margin-top: 15px;
+    font-size: 4vw;
 }
 
 /* Floating Hearts */
 .heart {
-    position: absolute;
+    position: fixed;
     bottom: -20px;
     color: #ff4d88;
     animation: float 6s linear infinite;
+    pointer-events: none;
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-110vh) scale(1.5);
-        opacity: 0;
-    }
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
 }
 
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+@keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
 }
 
-/* Desktop adjustment */
+/* Desktop */
 @media (min-width: 768px) {
-    .envelope { font-size: 120px; }
+    .content h1 { font-size: 40px; }
+    .content p { font-size: 18px; }
+    .caption { font-size: 16px; }
     .open-text { font-size: 20px; }
-    .message h1 { font-size: 40px; }
-    .message p { font-size: 20px; }
+    .envelope { font-size: 120px; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- Amplop -->
+<div class="envelope-section" id="envelopeSection">
+    <div class="envelope" onclick="openLetter()">💌</div>
+    <div class="open-text">Klik untuk membuka</div>
+</div>
 
-    <div class="envelope-container" onclick="openLetter()">
-        <div class="envelope">💌</div>
-        <div class="open-text">Klik untuk membuka</div>
+<!-- Konten Scroll -->
+<div class="content" id="content">
+    <h1>Happy Valentine 💗</h1>
+    <p>
+        Untuk kamu yang selalu membuat hariku lebih hangat.  
+        Terima kasih sudah hadir dan menjadi alasan senyumku setiap hari.
+    </p>
+
+    <!-- FOTO 1 -->
+    <div class="photo-card">
+        <img src="foto1.jpg" alt="Foto 1">
+        <div class="caption">Momen pertama yang selalu bikin aku senyum 💗</div>
     </div>
 
-    <div class="message" id="message">
-        <h1>Happy Valentine 💗</h1>
-        <p>
-            Untuk kamu yang selalu membuat hariku lebih hangat.<br><br>
-            Terima kasih sudah hadir dan menjadi alasan senyumku setiap hari.<br><br>
-            Semoga kita terus berjalan bersama, dengan cerita yang semakin indah.
-        </p>
+    <!-- FOTO 2 -->
+    <div class="photo-card">
+        <img src="foto2.jpg" alt="Foto 2">
+        <div class="caption">Setiap tawa kamu, selalu jadi favoritku ✨</div>
+    </div>
+
+    <!-- FOTO 3 -->
+    <div class="photo-card">
+        <img src="foto3.jpg" alt="Foto 3">
+        <div class="caption">Semoga kita terus bersama sampai cerita ini panjang 🤍</div>
     </div>
 
 </div>
@@ -127,9 +152,10 @@ body {
 
 <script>
 function openLetter() {
-    document.querySelector('.envelope-container').style.display = 'none';
-    document.getElementById('message').style.display = 'block';
-    document.getElementById('bgMusic').play();
+    document.getElementById("envelopeSection").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    document.body.style.overflow = "auto";
+    document.getElementById("bgMusic").play();
     createHearts();
 }
 
@@ -142,10 +168,8 @@ function createHearts() {
         heart.style.fontSize = (Math.random() * 10 + 15) + "px";
         document.body.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-        }, 6000);
-    }, 500);
+        setTimeout(() => heart.remove(), 6000);
+    }, 600);
 }
 </script>
 

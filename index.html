@@ -44,10 +44,10 @@ body {
     margin-top: 10px;
 }
 
-/* ===== Konten Setelah Klik ===== */
+/* ===== Konten ===== */
 .content {
     display: none;
-    padding: 30px 20px 60px 20px;
+    padding: 40px 20px;
     color: #b03060;
 }
 
@@ -58,26 +58,52 @@ body {
 
 .content p {
     font-size: 4.5vw;
-    margin-bottom: 40px;
-    line-height: 1.6;
+    margin-bottom: 60px;
+    line-height: 1.7;
 }
 
-/* Foto Section */
-.photo-card {
-    margin-bottom: 40px;
-    animation: fadeInUp 1s ease;
+/* ===== Scroll Reveal ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1.2s ease;
 }
 
-.photo-card img {
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== Parallax Section ===== */
+.parallax {
+    position: relative;
+    overflow: hidden;
+}
+
+.parallax img {
     width: 100%;
     max-width: 350px;
     border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease-out;
 }
 
 .caption {
     margin-top: 15px;
     font-size: 4vw;
+}
+
+/* ===== Last Section Fullscreen ===== */
+.love-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9ebc, #ff6f91);
+    color: white;
+    font-size: 12vw;
+    font-weight: bold;
+    letter-spacing: 4px;
 }
 
 /* Floating Hearts */
@@ -94,11 +120,6 @@ body {
     100% { transform: translateY(-110vh); opacity: 0; }
 }
 
-@keyframes fadeInUp {
-    from {opacity: 0; transform: translateY(30px);}
-    to {opacity: 1; transform: translateY(0);}
-}
-
 /* Desktop */
 @media (min-width: 768px) {
     .content h1 { font-size: 40px; }
@@ -106,6 +127,7 @@ body {
     .caption { font-size: 16px; }
     .open-text { font-size: 20px; }
     .envelope { font-size: 120px; }
+    .love-section { font-size: 70px; }
 }
 </style>
 </head>
@@ -118,10 +140,12 @@ body {
     <div class="open-text">Klik untuk membuka</div>
 </div>
 
-<!-- Konten Scroll -->
+<!-- Konten -->
 <div class="content" id="content">
-    <h1>Happy Valentine 💗</h1>
-    <p>
+
+    <h1 class="reveal">Happy Valentine 💗</h1>
+
+    <p class="reveal">
         Buat kamu yang selalu nemenin aku.
         Maaf ya aku gabisa selalu nemenin kamu, belum jadi apa yang kamu mau,
         belum bener bener jadi yang terbaik. tapi, itu semua pasti waktu yang perbaikin.
@@ -129,21 +153,26 @@ body {
     </p>
 
     <!-- FOTO 1 -->
-    <div class="photo-card">
-        <img src="foto1.jpg" alt="Foto 1">
+    <div class="parallax reveal">
+        <img src="foto1.jpg">
         <div class="caption">foto bareng pertama kita... 💗</div>
     </div>
 
     <!-- FOTO 2 -->
-    <div class="photo-card">
-        <img src="foto2.jpg" alt="Foto 2">
-        <div class="caption">setiap kamu kirim foto pasti aku simpen kok, walau jarang ku upload xixixi ✨</div>
+    <div class="parallax reveal">
+        <img src="foto2.jpg">
+        <div class="caption">setiap kamu kirim foto pasti aku simpen kok ✨</div>
     </div>
 
     <!-- FOTO 3 -->
-    <div class="photo-card">
-        <img src="foto3.jpg" alt="Foto 3">
+    <div class="parallax reveal">
+        <img src="foto3.jpg">
         <div class="caption">semoga kita bisa bareng bareng terus yaa 🤍</div>
+    </div>
+
+    <!-- LAST FULLSCREEN -->
+    <div class="love-section reveal">
+        I LOVE YOU 🤍
     </div>
 
 </div>
@@ -159,8 +188,10 @@ function openLetter() {
     document.body.style.overflow = "auto";
     document.getElementById("bgMusic").play();
     createHearts();
+    activateReveal();
 }
 
+/* Floating Hearts */
 function createHearts() {
     setInterval(() => {
         const heart = document.createElement("div");
@@ -169,13 +200,35 @@ function createHearts() {
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.fontSize = (Math.random() * 10 + 15) + "px";
         document.body.appendChild(heart);
-
         setTimeout(() => heart.remove(), 6000);
     }, 600);
 }
+
+/* Scroll Reveal */
+function activateReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.2 });
+
+    reveals.forEach(reveal => observer.observe(reveal));
+}
+
+/* Parallax Effect */
+window.addEventListener('scroll', function() {
+    const images = document.querySelectorAll('.parallax img');
+    images.forEach(img => {
+        const speed = 0.2;
+        const offset = window.pageYOffset;
+        img.style.transform = "translateY(" + offset * speed * 0.05 + "px)";
+    });
+});
 </script>
 
 </body>
 </html>
-
-
